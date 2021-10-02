@@ -1,0 +1,22 @@
+.box_content_modal {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.content_modal_title {
+    font-size: 30px;
+}
+
+.content_modal_text {
+    font-size: 18px;
+}
+
+.content_modal_sub_title{
+    font-size: 20px;
+}

@@ -1,0 +1,44 @@
+.form_box {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.form_sub_box {
+    max-width: 400px ;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.error_label {
+    color: #de0707;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.error_title {
+    margin-bottom: 5px;
+
+}
+
+.error_label .form_input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    color: #3b3939;
+    font-size: 16px;
+    padding: 7px 10px;
+    box-sizing: border-box;
+}
+

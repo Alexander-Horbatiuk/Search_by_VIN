@@ -1,0 +1,54 @@
+.window_for_modal {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.card_variables {
+    max-width: 200px;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    padding: 10px 10px 20px 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: .04s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    background: #fff;
+    position: relative;
+    border: 1px solid #e7e7e7;
+}
+
+.card_variables:hover {
+    transform: scale(1.01);
+}
+
+.card_variables_title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.card_variables_sub_title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.card_variables_sub_text{
+    margin: 0;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+}
+

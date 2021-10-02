@@ -1,0 +1,25 @@
+.card_box_description {
+    padding: 100px 10px 0 10px ;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+}
+
+.card_box {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+}
+

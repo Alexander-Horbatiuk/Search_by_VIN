@@ -1,0 +1,26 @@
+.card_box {
+    max-width: 1050px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.card {
+    max-width: 200px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.card_title {
+    font-size: 18px;
+}
+
+.card_text {
+    font-size: 16px;
+}
