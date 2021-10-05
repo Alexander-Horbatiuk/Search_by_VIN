@@ -5,34 +5,33 @@ import './DetailItem/style.css'
 import {DetailItem} from './DetailItem';
 import Button from '@mui/material/Button';
 import './style.css'
-
-const useStateWithLocalStorage = (localStorageKey) => {
-    const [value, setValue] = React.useState(
-        localStorage.getItem(localStorageKey) || ''
-    );
-
-    useEffect(() => {
-        localStorage.setItem(localStorageKey, value);
-    },[value, localStorageKey]);
-    return [value, setValue];
-};
+import {SavedVinCode} from './SavedVinCode'
 
 export const Form = () =>{
     const [vin, setVin] = useState('')
     const [vinDetails, setVinDetails] = useState(null)
     const [errorName, setErrorName] = useState(false)
 
-    const [value, setValue] = useStateWithLocalStorage(
-        'myValueInLocalStorage'
+// ____________________________________----------------Local
+    const [vinItems, setVinItems] = useState(
+        JSON.parse(localStorage.getItem('vinList' )) || []
     );
+
+    if (vinItems.length > 6) {
+        setVinItems(reg => reg.splice(1))
+    }
+
+    useEffect(() => {
+        localStorage.setItem('vinList', JSON.stringify(vinItems))
+    }, [vinItems])
+// _____________________________________----------------Local
 
     const getVinInput = (e) => {
         setVin(e.target.value)
-        setValue(e.target.value);
     }
 
     const validateName = (e) => {
-        if (vin === '') {
+        if (vin.trim() === '') {
             setErrorName('не ленись заполни поле')
             return false
         }
@@ -47,9 +46,21 @@ export const Form = () =>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         setVin('');
-        await axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
-            .then(item => setVinDetails(item.data.Results.filter(filterResult => filterResult.Value)))
-            .catch(err => setErrorName(`${err}`))
+
+        const resultAxios = await axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
+        const itemVin = resultAxios.data.Results.filter(filterResult => filterResult.Value)
+
+        // __________________________________----------------Local
+        if (vin.trim() !== '') {
+            const newItem = {
+                item: vin,
+                value: itemVin,
+            } || []
+            setVinItems((items) => [...items, newItem])
+        }
+    
+        setVinDetails(itemVin)
+        // __________________________----------------Local
     }
 
     return (
@@ -58,13 +69,18 @@ export const Form = () =>{
             <div className="form_sub_box">
                 <label className="error_label">
                     {errorName?  <span className="error_title">{errorName}</span> : ''}
-                    <input type="text" className="form_input" pattern="vin code" value={vin} onChange={getVinInput}  onBlur={validateName} />
-                </label>
-                <Button onClick={handleSubmit} variant="contained" fullWidth>проверить vin</Button>
+                    <input type="text"
+                           className="form_input"
+                           pattern="vin code"
+                           value={vin}
+                           onChange={getVinInput}
+                           onBlur={validateName}
+                    />
+                    </label>
+                <Button onClick={handleSubmit } variant="contained" fullWidth>проверить vin</Button>
                 <Button component={Link} to="/variables" variant="outlined" fullWidth>посмотреть все ошибки</Button>
             </div>
-
-            <p>{value}</p>
+            {vinItems && vinItems.map((item, index) => <SavedVinCode key={index} item={item} />)}
 
             <div className="card_box">
                 {vinDetails && vinDetails.map((item, index) => <DetailItem key={index} detail={item} />)}
@@ -72,5 +88,22 @@ export const Form = () =>{
         </div>
 
     )
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
